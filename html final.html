@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLADUR PINTURA E BARRAMENTO</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f9fafb; color:#1f2937; }
+    
+    header { 
+      background:#fff; 
+      box-shadow:0 4px 6px rgba(0,0,0,0.1); 
+      padding:1rem 2rem; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      position:sticky; 
+      top:0; 
+      z-index:1000; 
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      gap: 3rem;
+    }
+    
+    .logo img { height:120px; }
+    
+    .nav-list { 
+      list-style:none; 
+      display:flex; 
+      gap:1rem; 
+      margin:0; 
+      padding:0; 
+    }
+    .nav-link { 
+      text-decoration:none; 
+      color:#1f2937; 
+      font-weight:bold; 
+      cursor:pointer; 
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+    .nav-link:hover { 
+      color: #1e40af; 
+      background: #e0f2fe;
+      border-color: #1e40af;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(30, 64, 175, 0.2);
+    }
+    .nav-link.active { 
+      color: white; 
+      background: #1e40af;
+      border-color: #1e40af;
+      box-shadow: 0 4px 8px rgba(30, 64, 175, 0.3);
+    }
+    
+    .back-to-home {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #1e40af;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1001;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .back-to-home:hover {
+      background: #1e3a8a;
+      transform: translateY(-2px);
+    }
+    
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s ease;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .whatsapp-float img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+    
+    .hero { 
+      background:linear-gradient(135deg,#f0f9ff,#e0f2fe); 
+      padding:3rem; 
+      text-align:center; 
+      position: relative;
+    }
+    
+    .page-title-main {
+      background: rgba(30, 64, 175, 0.9);
+      color: white;
+      padding: 25px 40px;
+      border-radius: 12px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+      margin-bottom: 2rem;
+      display: inline-block;
+      box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+      max-width: 800px;
+    }
+    
+    .title-subtitle {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-top: 15px;
+      line-height: 1.5;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .title-cta {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 10px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .carousel-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .dot.active {
+      background: #1e40af;
+    }
+    
+    .gallery-section { padding:3rem 1rem; background:#f3f4f6; text-align:center; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem; margin-top:2rem; }
+    .gallery-item { background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .page-content { max-width:800px; margin:2rem auto; background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.1); display:none; }
+    .page-content.active { display:block; }
+    .page-title { color:#1e40af; margin-bottom:1rem; font-size:2rem; }
+    label { display:block; margin-top:1rem; font-weight:bold; }
+    input { width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; margin-top:5px; box-sizing:border-box; }
+    button { margin-top:20px; padding:12px 20px; background:#1e40af; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+    button:hover { background:#1e3a8a; }
+    .resultado { margin-top:20px; padding:15px; background:#e0f2fe; border-radius:6px; font-size:18px; font-weight:bold; color:#1e40af; display:none; }
+    footer { background:#1f2937; color:#fff; padding:2rem; text-align:center; margin-top:3rem; }
+    
+    .calculator-container { margin-top: 2rem; }
+    .calculator-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid #e5e7eb; }
+    .tab-button { padding: 0.75rem 1.5rem; background: #f3f4f6; border: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 500; color: #6b7280; transition: all 0.2s ease; }
+    .tab-button.active { background: #1e40af; color: white; }
+    .tab-button:hover:not(.active) { background: #e5e7eb; }
+    .tab-content { display: none; padding: 2rem 0; }
+    .tab-content.active { display: block; }
+    .tab-content h3 { color: #1e40af; margin-bottom: 1.5rem; font-size: 1.5rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151; }
+    .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; transition: border-color 0.2s ease; box-sizing: border-box; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #1e40af; box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1); }
+    .calc-button { background: #1e40af; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background 0.2s ease; margin-top: 1rem; }
+    .calc-button:hover { background: #1e3a8a; }
+    .resultado-calculadora { margin: 2rem 0; padding: 1.5rem; background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border-radius: 12px; border-left: 4px solid #1e40af; display: none; }
+    .resultado-calculadora.show { display: block; }
+    .resultado-calculadora h4 { color: #1e40af; margin-bottom: 1rem; }
+    .resultado-calculadora .price { font-size: 1.5rem; font-weight: 700; color: #059669; }
+    .combined-calculator { margin-top: 3rem; padding: 2rem; background: #f9fafb; border-radius: 12px; border: 2px solid #e5e7eb; }
+    .combined-calculator h3 { color: #1e40af; margin-bottom: 1.5rem; text-align: center; }
+    .combined-results { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .service-result { padding: 1rem; background: white; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+    .total-result { padding: 1.5rem; background: #1e40af; color: white; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.25rem; }
+    .clear-button { background: #dc2626; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: background 0.2s ease; width: 100%; }
+    .clear-button:hover { background: #b91c1c; }
+    
+    .content p { margin-bottom: 1rem; line-height: 1.7; font-size: 1.1rem; }
+    .highlight { color: #1e40af; font-weight: bold; }
+    
+    .contact-info { margin: 20px 0; font-size: 1.1rem; }
+    .contact-info p { margin: 8px 0; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    textarea { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; width: 100%; box-sizing: border-box; font-family: Arial, sans-serif; }
+    
+    @media (max-width: 768px) {
+      .calculator-tabs { flex-direction: column; }
+      .tab-button { border-radius: 8px; margin-bottom: 0.5rem; }
+      .nav-list { flex-direction: column; gap: 0.5rem; }
+      .header-content { flex-direction: column; gap: 1.5rem; }
+      .nav-link { padding: 10px 16px; font-size: 0.9rem; }
+      .page-title-main { 
+        font-size: 1.8rem; 
+        padding: 20px 25px; 
+        margin-bottom: 1.5rem;
+        max-width: 90%;
+      }
+      .title-subtitle {
+        font-size: 1rem;
+        margin-top: 12px;
+      }
+      .title-cta {
+        font-size: 1.1rem;
+        margin-top: 8px;
+      }
+      .back-to-home { top: 10px; left: 10px; padding: 8px 12px; font-size: 0.9rem; }
+      .whatsapp-float { bottom: 15px; right: 15px; width: 50px; height: 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-to-home" onclick="showSection('home')" style="display: none;">🏠 Início</button>
+
+  <a href="https://wa.me/351932639406" target="_blank" class="whatsapp-float">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnWgz8nLD_f9wi-g8-5TeEQt5vrj_hxS2R2WdhedNhk63qCAwTTP6Kf8fnndow9RiAxvsNIV8bhccSyeseLM9zPxxiZxjfwKXxHE3UHk4DgaIiJT4zZgbzn8olzMPZ_qnsEGskWvBFbWblt0H_KY2opyDYEjDx2lbPW7LnN5KL-jT5AEyt3UFm0lRuhCax/s1600/BOTON%20DE%20WHATSAP.png" alt="WhatsApp">
+  </a>
+
+  <header>
+    <div class="header-content">
+      <a href="#" class="logo" onclick="showSection('home')"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjE6tFUJDo9UQC8W6XCJ-C3dgpk4yzWg3ZVbFw2jLUdFzhDofP2lya-gF4XEBYuuZbM-Hd5tC90SCCRbeNqiZGjlusWWVV1I5_0nZDG1KcLavoDEwT4zA8-rFAWa5kvKzsTI8Excqf3YFwMx7ZZAF0BC8evioM9cGQv-yS8NFaWR1ze1nLDaTqEWLuNshKY/s1024/PLADUR%20PINTURA%20E%20BARRAMENTO%20LOGO.png" alt="Logo"></a>
+      <nav>
+        <ul class="nav-list">
+          <li><a class="nav-link active" onclick="showSection('home')">INÍCIO</a></li>
+          <li><a class="nav-link" onclick="showSection('galeria')">GALERIA</a></li>
+          <li><a class="nav-link" onclick="showSection('calculadora')">CALCULADORA</a></li>
+          <li><a class="nav-link" onclick="showSection('sobre-nos')">SOBRE NÓS</a></li>
+          <li><a class="nav-link" onclick="showSection('contactos')">CONTACTOS</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="page-title-main">
+      PLADUR PINTURA E BARRAMENTO
+      <div class="title-subtitle">
+        Construímos confiança, criamos acabamentos.<br>
+        Fale connosco e descubra como podemos transformar o seu espaço.
+      </div>
+      <div class="title-cta">
+        Peça já o seu orçamento!
+      </div>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel-slides" id="carouselSlides">
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvkFUqvhgXJQwVOITBtWmKOAMkiF-pwMnmqT7v8POF4bGMyFg9WEYMDD6yOCvyy109ZoVe5gc3j4g9ERBXPUEeulHTDpvFn3Him2BBZOcQJVAN85jWGglxa6e4GSZ7WES0tWXmOP3Brnm34sXImb5fVF-GrXVYDdcwIy5c_1_RUwqIOkFbe3O7f1EEhhUw/s1536/trabajo%20em%20loja.png" alt="Trabalho em Loja">
+        </div>
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEins0RmgCV9OzGtQEE5aY5D2k_Sqdgou9XgQBIhHwyCdjiBJxeOiRKrp5jRwkxr8QGg2n-Q5AyET5UXbPwmugMSFmw7H-4Rfma_VzY7Qp1VZYJpcvZ3VrRkgQUYIyYpfcFk2xpR0hdaAFkXCbQS4JRPsbvaaYt1KElItpT7a7354s36b-jBnef7x5WEOu9I/s1536/barramento.png" alt="Barramento">
+        </div>
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOQ5qy4RreodWNON_KsLrS7mANDYZi8f2ScX3lG4yCFOK93-R4tLee0kjj11Epn-mi3vL1TvC2_DH9uEp6bHXz-bhqbRGVxDzFVrdXjlG0rkjprlhyphenhyphenul_VjPdYUWYdf__tCzjZV65vjfAjYgV96kueJP_N-dlSjhGLDgvANNTrgJa-FPuX1rk9JTechkRb/s1536/pintor%20no%20exterior.png" alt="Pintor no Exterior">
+        </div>
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7uws3I2lVF7RrC0E0a8EOmnfVO1D98O4OBOh4QOIOpAATjgKMwXxGqDOiiV2ah3JVKaJit0hL9DRgheq-02eZuqhEoGrKPA5a2OE7y4QdIcBgtL1twhIGeiR5UCv9tOV-osHpiKhBPNw0q0oZfsA7vU3iZejXhtdGs3J43IKPOcEWlL43eR3sT_64Z5ZC/s1536/trabalhador%20%20pladur%20pared.png" alt="Trabalhador Pladur Parede">
+        </div>
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0Z57wGsGC_yICz8PJMXOYUFyirgXrdgqtmfa6MIi0vNCwzvKgSnuo3tV8HNrraU_ZwTy7-4KDL96UTPEQs9pAcDExI20yn42a441jZfgstYDRtjxXFTIpPpdcdc8v0vrgfeOLMh1z8NzPqI87s3PKl8bfYp61-isdK5-Ra7t4bok5qEOQ8DyEm5LGkIH9/s1024/trabalhador%20pintura%20pared.png" alt="Trabalhador Pintura Parede">
+        </div>
+        <div class="carousel-slide">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXpA5LRz5l0n4WYRgcOMTfrolNx8d-k1tZW6JYnO5Ng5tJE0J5JxtMmBiMzHpF_7vqqWT52dOgRRIBpAUQIqTdMBgMIjKrIoA9pKVxGOQhs5nFjfvK4dr_Zb7478MrP-aR54kNdCq2l31HWGkw8xB1MosSGMyg2R9Uh3Bfy2YhDup820VAyIGqYUHq_eFi/s1536/trabalhador%20pladur%20teto.png" alt="Trabalhador Pladur Teto">
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <section id="galeria" class="gallery-section" style="display:none;">
+    <h2>GALERIA</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><h3>Projetos de Pladur</h3><p>Especialistas em instalação e acabamento de pladur.</p></div>
+      <div class="gallery-item"><h3>Pintura Residencial</h3><p>Pintura interior e exterior com as melhores técnicas.</p></div>
+      <div class="gallery-item"><h3>Barramento</h3><p>Serviços de barramento e acabamentos finais.</p></div>
+    </div>
+  </section>
+
+  <section id="calculadora" class="page-content">
+    <h1 class="page-title">Calculadora de Orçamentos</h1>
+    <p>Use a nossa calculadora avançada para obter uma estimativa detalhada dos custos dos nossos serviços.</p>
+
+    <div class="calculator-container">
+      <div class="calculator-tabs">
+        <button class="tab-button active" onclick="showTab('pladur')">Pladur</button>
+        <button class="tab-button" onclick="showTab('pintura')">Pintura</button>
+        <button class="tab-button" onclick="showTab('barramento')">Barramento</button>
+      </div>
+
+      <div id="pladur-tab" class="tab-content active">
+        <h3>Calculadora de Pladur</h3>
+        <div class="form-group">
+          <label for="pladur-area">Área (m²):</label>
+          <input type="number" id="pladur-area" placeholder="Ex: 50" step="0.1">
+        </div>
+        <div class="form-group">
+          <label for="pladur-tipo">Tipo de Pladur:</label>
+          <select id="pladur-tipo">
+            <option value="15">Standard (15€/m²)</option>
+            <option value="18">Resistente à Humidade (18€/m²)</option>
+            <option value="22">Resistente ao Fogo (22€/m²)</option>
+            <option value="25">Acústico (25€/m²)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pladur-complexidade">Complexidade:</label>
+          <select id="pladur-complexidade">
+            <option value="1">Simples (sem acréscimo)</option>
+            <option value="1.2">Média (+20%)</option>
+            <option value="1.5">Complexa (+50%)</option>
+          </select>
+        </div>
+        <button onclick="calcularPladur()" class="calc-button">Calcular Pladur</button>
+      </div>
+
+      <div id="pintura-tab" class="tab-content">
+        <h3>Calculadora de Pintura</h3>
+        <div class="form-group">
+          <label for="pintura-area">Área (m²):</label>
+          <input type="number" id="pintura-area" placeholder="Ex: 100" step="0.1">
+        </div>
+        <div class="form-group">
+          <label for="pintura-tipo">Tipo de Pintura:</label>
+          <select id="pintura-tipo">
+            <option value="8">Tinta Plástica Interior (8€/m²)</option>
+            <option value="12">Tinta Plástica Exterior (12€/m²)</option>
+            <option value="15">Tinta Acrílica Premium (15€/m²)</option>
+            <option value="20">Tinta Especial/Texturada (20€/m²)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pintura-demãos">Número de Demãos:</label>
+          <select id="pintura-demãos">
+            <option value="1">1 Demão</option>
+            <option value="1.5">2 Demãos (+50%)</option>
+            <option value="2">3 Demãos (+100%)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pintura-preparacao">Preparação da Superfície:</label>
+          <select id="pintura-preparacao">
+            <option value="0">Não necessária</option>
+            <option value="3">Lixagem ligeira (+3€/m²)</option>
+            <option value="5">Preparação completa (+5€/m²)</option>
+          </select>
+        </div>
+        <button onclick="calcularPintura()" class="calc-button">Calcular Pintura</button>
+      </div>
+
+      <div id="barramento-tab" class="tab-content">
+        <h3>Calculadora de Barramento</h3>
+        <div class="form-group">
+          <label for="barramento-area">Área (m²):</label>
+          <input type="number" id="barramento-area" placeholder="Ex: 80" step="0.1">
+        </div>
+        <div class="form-group">
+          <label for="barramento-tipo">Tipo de Barramento:</label>
+          <select id="barramento-tipo">
+            <option value="10">Barramento Simples (10€/m²)</option>
+            <option value="15">Barramento com Textura (15€/m²)</option>
+            <option value="18">Barramento Decorativo (18€/m²)</option>
+            <option value="22">Barramento Especial (22€/m²)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="barramento-espessura">Espessura:</label>
+          <select id="barramento-espessura">
+            <option value="1">Fina (sem acréscimo)</option>
+            <option value="1.3">Média (+30%)</option>
+            <option value="1.6">Grossa (+60%)</option>
+          </select>
+        </div>
+        <button onclick="calcularBarramento()" class="calc-button">Calcular Barramento</button>
+      </div>
+
+      <div id="resultado-calculadora" class="resultado-calculadora"></div>
+
+      <div class="combined-calculator">
+        <h3>Orçamento Total Combinado</h3>
+        <div class="combined-results">
+          <div class="service-result" id="pladur-result">Pladur: 0€</div>
+          <div class="service-result" id="pintura-result">Pintura: 0€</div>
+          <div class="service-result" id="barramento-result">Barramento: 0€</div>
+          <div class="total-result" id="total-result">Total: 0€</div>
+        </div>
+        <p style="text-align: center; font-size: 0.9rem; color: #6b7280; margin: 1rem 0;"><strong>* Preços sem IVA</strong></p>
+        <button onclick="limparCalculadora()" class="clear-button">Limpar Tudo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-nos" class="page-content">
+    <h1 class="page-title">Sobre Nós</h1>
+    <div class="content">
+      <p>Na <span class="highlight">Pladur Pintura e Barramento</span>, dedicamo-nos há mais de <span class="highlight">10 anos</span> a transformar espaços com profissionalismo, dedicação e qualidade. 
+      Cada projeto que realizamos reflete o nosso compromisso com a excelência e a satisfação do cliente.</p>
+
+      <p>Temos uma equipa experiente e especializada em <span class="highlight">pladur</span>, <span class="highlight">pintura</span> e <span class="highlight">barramento</span>, capaz de executar desde pequenas remodelações até grandes obras com o mesmo rigor e atenção ao detalhe.</p>
+
+      <p>A nossa <span class="highlight">responsabilidade</span> e <span class="highlight">cumprimento de prazos</span> são valores fundamentais que fazem de nós um parceiro de confiança. Trabalhamos com materiais de alta qualidade e seguimos as melhores práticas do setor, garantindo resultados duradouros.</p>
+
+      <p>Escolher a nossa empresa é optar por <span class="highlight">profissionalismo</span>, <span class="highlight">seriedade</span> e uma equipa que coloca o cliente em primeiro lugar. Estamos prontos para ouvir as suas necessidades e oferecer soluções personalizadas que valorizam o seu espaço.</p>
+
+      <p><strong>Confie em nós para dar vida ao seu projeto. A sua tranquilidade e satisfação são a nossa maior recompensa!</strong></p>
+    </div>
+  </section>
+
+  <section id="contactos" class="page-content">
+    <h1 class="page-title">Contacte-nos</h1>
+    
+    <div class="contact-info">
+      <p><strong>📞 Telefone:</strong> <a href="tel:+351932639406">932 639 406</a></p>
+      <p><strong>💬 WhatsApp:</strong> <a href="https://wa.me/351932639406" target="_blank">+351 932 639 406</a></p>
+      <p><strong>📧 Email:</strong> <a href="mailto:pinturaebarramento@gmail.com">pinturaebarramento@gmail.com</a></p>
+    </div>
+
+    <h2>Formulário de Contacto</h2>
+    <form>
+      <input type="text" name="nome" placeholder="O seu nome" required>
+      <input type="email" name="email" placeholder="O seu email" required>
+      <textarea name="mensagem" rows="5" placeholder="A sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2024 PLADUR PINTURA E BARRAMENTO. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    let resultados = {
+      pladur: 0,
+      pintura: 0,
+      barramento: 0
+    };
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    function showSection(sectionName) {
+      const sections = ['home', 'galeria', 'calculadora', 'sobre-nos', 'contactos'];
+      sections.forEach(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          if (section === 'home' || section === 'galeria') {
+            element.style.display = 'none';
+          } else {
+            element.classList.remove('active');
+          }
+        }
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      const targetSection = document.getElementById(sectionName);
+      if (targetSection) {
+        if (sectionName === 'home' || sectionName === 'galeria') {
+          targetSection.style.display = sectionName === 'home' ? 'flex' : 'block';
+        } else {
+          targetSection.classList.add('active');
+        }
+      }
+
+      const backButton = document.querySelector('.back-to-home');
+      if (sectionName === 'home') {
+        backButton.style.display = 'none';
+      } else {
+        backButton.style.display = 'block';
+      }
+
+      const activeLink = document.querySelector(`[onclick="showSection('${sectionName}')"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+
+    function showTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      const buttons = document.querySelectorAll('.tab-button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(tabName + '-tab').classList.add('active');
+      
+      event.target.classList.add('active');
+    }
+
+    function calcularPladur() {
+      const area = parseFloat(document.getElementById('pladur-area').value);
+      const tipo = parseFloat(document.getElementById('pladur-tipo').value);
+      const complexidade = parseFloat(document.getElementById('pladur-complexidade').value);
+      const resultadoDiv = document.getElementById('resultado-calculadora');
+
+      if (isNaN(area) || area <= 0) {
+        mostrarErro('Por favor, insira uma área válida para o pladur.');
+        return;
+      }
+
+      const total = area * tipo * complexidade;
+      resultados.pladur = total;
+      
+      const tipoTexto = document.getElementById('pladur-tipo').selectedOptions[0].text;
+      const complexidadeTexto = document.getElementById('pladur-complexidade').selectedOptions[0].text;
+      
+      resultadoDiv.innerHTML = `
+        <h4>💡 Orçamento de Pladur</h4>
+        <p><strong>Área:</strong> ${area} m²</p>
+        <p><strong>Tipo:</strong> ${tipoTexto}</p>
+        <p><strong>Complexidade:</strong> ${complexidadeTexto}</p>
+        <p class="price">💰 Total: ${total.toFixed(2)} € <span style="font-size: 0.8em; color: #6b7280;">(sem IVA)</span></p>
+      `;
+      resultadoDiv.classList.add('show');
+      
+      atualizarTotal();
+    }
+
+    function calcularPintura() {
+      const area = parseFloat(document.getElementById('pintura-area').value);
+      const tipo = parseFloat(document.getElementById('pintura-tipo').value);
+      const demãos = parseFloat(document.getElementById('pintura-demãos').value);
+      const preparacao = parseFloat(document.getElementById('pintura-preparacao').value);
+      const resultadoDiv = document.getElementById('resultado-calculadora');
+
+      if (isNaN(area) || area <= 0) {
+        mostrarErro('Por favor, insira uma área válida para a pintura.');
+        return;
+      }
+
+      const total = (area * tipo * demãos) + (area * preparacao);
+      resultados.pintura = total;
+      
+      const tipoTexto = document.getElementById('pintura-tipo').selectedOptions[0].text;
+      const demãosTexto = document.getElementById('pintura-demãos').selectedOptions[0].text;
+      const preparacaoTexto = document.getElementById('pintura-preparacao').selectedOptions[0].text;
+      
+      resultadoDiv.innerHTML = `
+        <h4>🎨 Orçamento de Pintura</h4>
+        <p><strong>Área:</strong> ${area} m²</p>
+        <p><strong>Tipo:</strong> ${tipoTexto}</p>
+        <p><strong>Demãos:</strong> ${demãosTexto}</p>
+        <p><strong>Preparação:</strong> ${preparacaoTexto}</p>
+        <p class="price">💰 Total: ${total.toFixed(2)} € <span style="font-size: 0.8em; color: #6b7280;">(sem IVA)</span></p>
+      `;
+      resultadoDiv.classList.add('show');
+      
+      atualizarTotal();
+    }
+
+    function calcularBarramento() {
+      const area = parseFloat(document.getElementById('barramento-area').value);
+      const tipo = parseFloat(document.getElementById('barramento-tipo').value);
+      const espessura = parseFloat(document.getElementById('barramento-espessura').value);
+      const resultadoDiv = document.getElementById('resultado-calculadora');
+
+      if (isNaN(area) || area <= 0) {
+        mostrarErro('Por favor, insira uma área válida para o barramento.');
+        return;
+      }
+
+      const total = area * tipo * espessura;
+      resultados.barramento = total;
+      
+      const tipoTexto = document.getElementById('barramento-tipo').selectedOptions[0].text;
+      const espessuraTexto = document.getElementById('barramento-espessura').selectedOptions[0].text;
+      
+      resultadoDiv.innerHTML = `
+        <h4>🏗️ Orçamento de Barramento</h4>
+        <p><strong>Área:</strong> ${area} m²</p>
+        <p><strong>Tipo:</strong> ${tipoTexto}</p>
+        <p><strong>Espessura:</strong> ${espessuraTexto}</p>
+        <p class="price">💰 Total: ${total.toFixed(2)} € <span style="font-size: 0.8em; color: #6b7280;">(sem IVA)</span></p>
+      `;
+      resultadoDiv.classList.add('show');
+      
+      atualizarTotal();
+    }
+
+    function mostrarErro(mensagem) {
+      const resultadoDiv = document.getElementById('resultado-calculadora');
+      resultadoDiv.innerHTML = `<h4>⚠️ Erro</h4><p>${mensagem}</p>`;
+      resultadoDiv.classList.add('show');
+    }
+
+    function atualizarTotal() {
+      document.getElementById('pladur-result').innerHTML = `Pladur: ${resultados.pladur.toFixed(2)}€`;
+      document.getElementById('pintura-result').innerHTML = `Pintura: ${resultados.pintura.toFixed(2)}€`;
+      document.getElementById('barramento-result').innerHTML = `Barramento: ${resultados.barramento.toFixed(2)}€`;
+      
+      const total = resultados.pladur + resultados.pintura + resultados.barramento;
+      document.getElementById('total-result').innerHTML = `Total: ${total.toFixed(2)}€`;
+    }
+
+    function limparCalculadora() {
+      document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+      document.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+      resultados = { pladur: 0, pintura: 0, barramento: 0 };
+      document.getElementById('resultado-calculadora').classList.remove('show');
+      atualizarTotal();
+    }
+
+    function initCarousel() {
+      const dotsContainer = document.getElementById('carouselDots');
+      
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+      
+      setInterval(nextSlide, 4000);
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(slideIndex) {
+      currentSlide = slideIndex;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const slidesContainer = document.getElementById('carouselSlides');
+      const dots = document.querySelectorAll('.dot');
+      
+      slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection('home');
+      atualizarTotal();
+      initCarousel();
+    });
+  </script>
+</body>
+</html>
